@@ -1,0 +1,5 @@
+#this file is not gonna be uploaded to github
+
+# dependencies
+.env
+/node_modules
