@@ -5,6 +5,8 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var listsRouter = require("./routes/lists");
+var luanaRouter = require("./routes/luana-age");
+var getPresentsRouter = require("./routes/get-presents");
 
 var app = express();
 
@@ -14,7 +16,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+//routes
 app.use("/lists", listsRouter);
+app.use("/luana-age", luanaRouter);
+app.use("/", getPresentsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
