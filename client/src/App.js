@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
-import DisplayPresents from "./presentView.js";
+import ListsView from "./ListsView.js";
 
 function App() {
 	return (
 		<div>
 			<h1> OI EU FUNCIONO</h1>
-			<DisplayPresents />
+			<ListsView />
 		</div>
 	);
 }
