@@ -33,6 +33,15 @@ module.exports = async function db(query) {
 					return;
 				}
 
+				if (!Array.isArray(result) && result.constructor.name == "OkPacket") {
+					console.log("A");
+					con.end();
+					resolve(result);
+					return;
+				} else {
+					console.log("B");
+				}
+
 				if (!result.length) {
 					if (result.affectedRows === 0) {
 						results.error = "Action not complete";
@@ -51,6 +60,7 @@ module.exports = async function db(query) {
 				} else if (result[0].constructor.name == "OkPacket") {
 					// push the first item in result list to data (this accounts for situations
 					// such as when the query ends with SELECT LAST_INSERT_ID() and returns an insertId)
+
 					results.data.push(result[0]);
 				}
 
