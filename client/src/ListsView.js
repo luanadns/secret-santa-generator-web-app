@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 export default function ListsView() {
-  const [lists, setLists] = useState([])
-  
-  useEffect(() => {
-		fetch("http://localhost:5050/lists")
+	const [lists, setLists] = useState([]);
+
+	useEffect(() => {
+		fetch("http://localhost:5000/lists")
 			.then(res => res.json())
 			.then(lists => {
 				// upon success, update tasks
-				setLists(lists)
+				setLists(lists);
 			})
 			.catch(error => {
 				// upon failure, show error message
@@ -18,9 +18,11 @@ export default function ListsView() {
 	return (
 		<div>
 			<h1>I work</h1>
-      {lists.map(list => (
-        <div key={list.id}>{list.name} - {list.owner}</div>
-      ))}
+			{lists.map(list => (
+				<div key={list.id}>
+					{list.name} - {list.owner} - {list.presentName} - {list.url}
+				</div>
+			))}
 		</div>
 	);
 }
