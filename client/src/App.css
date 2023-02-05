@@ -1,0 +1,18 @@
+.page-header {
+    position: fixed;
+    width: 100vw;
+    height: 90px;
+    top: 0;
+    left: 0;
+    background-color: #eee;
+    border-bottom: solid 1px blueviolet;
+}
+
+.header-title {
+    color: blueviolet;
+    text-align: center;
+}
+
+.main-content {
+    margin-top: 90px;
+}

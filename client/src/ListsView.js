@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export default function ListsView() {
 	const [lists, setLists] = useState([]);
+	//const [error, setError] = useState("");
 
 	useEffect(() => {
 		fetch("http://localhost:5000/lists")
@@ -12,6 +13,7 @@ export default function ListsView() {
 			})
 			.catch(error => {
 				// upon failure, show error message
+				error("Oops! Something went wrong. Try again later");
 			});
 	}, []);
 
@@ -20,7 +22,9 @@ export default function ListsView() {
 			<h1>I work</h1>
 			{lists.map(list => (
 				<div key={list.id}>
-					{list.name} - {list.owner} - {list.presentName} - {list.url}
+					<a href={`/view-presents?list_id=${list.id}`}>
+						{list.name} - {list.owner}
+					</a>
 				</div>
 			))}
 		</div>
