@@ -43,7 +43,8 @@ save the last id added,
 add the presents,
 return the list id to the client 
  */
-router.post("/", async (req, res) => {
+router.post("/create", async (req, res) => {
+	console.log("Backend recebeu request");
 	const owner = req.body.owner;
 	const name = req.body.name; //name of the ocasion
 	const addPerson = await db(`INSERT INTO lists (owner, name) VALUES ("${owner}", "${name}");`);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export default function ListsView() {
 	const [lists, setLists] = useState([]);
-	//const [error, setError] = useState("");
+	const [error, setError] = useState("");
 
 	useEffect(() => {
 		fetch("http://localhost:5000/lists")
@@ -13,7 +13,7 @@ export default function ListsView() {
 			})
 			.catch(error => {
 				// upon failure, show error message
-				error("Oops! Something went wrong. Try again later");
+				setError(`Oops! Something went wrong. ${error}`);
 			});
 	}, []);
 
@@ -27,6 +27,7 @@ export default function ListsView() {
 					</a>
 				</div>
 			))}
+			{error ? <h1>{error}</h1> : null}
 		</div>
 	);
 }

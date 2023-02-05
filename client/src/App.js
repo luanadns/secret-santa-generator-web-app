@@ -2,9 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./Home.js";
-import ListsView from "./ListsView.js";
-import ListsCreation from "./ListsCreationView.js";
+import ListsCreationView from "./ListsCreationView.js";
 import PresentView from "./PresentView.js";
+import ListsView from "./ListsView.js";
 
 function App() {
 	return (
@@ -21,7 +21,7 @@ function App() {
 						</Route>
 						<Route exact path="/create">
 							{/* create list of presents */}
-							<ListsCreation />
+							<ListsCreationView />
 						</Route>
 						<Route exact path="/view-presents">
 							{/* view the presents */}
