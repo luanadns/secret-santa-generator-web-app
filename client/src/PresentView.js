@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 //i can use the id to get the info that I need from the back end
 // need another get fetch
 export default function PresentView() {
-	const [list, setList] = useState([]);
+	const [list, setList] = useState(null);
 	const [error, setError] = useState("");
 	const searchParams = new URLSearchParams(window.location.search); //variable that holds all query parameters in the browser with ?my_parameter=xxx
 	const id = searchParams.get("list_id"); //variable that holds the id
@@ -21,7 +21,8 @@ export default function PresentView() {
 				setError(`Oops! Couldn't get the presents list. ${err.message}`);
 			});
 	}, []);
-	console.log(list.presents[0].name);
+	console.log(list);
+	//console.log(list.presents[0].name);
 	return (
 		<div>
 			<h2>View presents</h2>
