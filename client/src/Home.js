@@ -1,16 +1,19 @@
 import React from "react";
 import "./Home.css";
+import { Link } from "react-router-dom";
 
 export default function Home() {
 	return (
 		<div className="home-container">
 			<div>
-				<h2 className="sub-title">BEM VINDIS</h2>
+				<h2 className="sub-title"> A Place For All Your Wishes</h2>
 			</div>
 			<div>
-				<a href="/create">
-					<h2> Crie sua lista </h2>
-				</a>
+				<Link to={"/create"}>
+					<button type="click">
+						<h2>I want to create a wishlist!</h2>
+					</button>
+				</Link>
 			</div>
 			<div>
 				<h3>

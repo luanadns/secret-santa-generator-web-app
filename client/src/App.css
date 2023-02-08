@@ -4,13 +4,16 @@
     height: 90px;
     top: 0;
     left: 0;
-    background-color: #eee;
+    background-color: rgb(255, 223, 255);
     border-bottom: solid 1px blueviolet;
 }
 
 .header-title {
     color: blueviolet;
     text-align: center;
+    top:0%;
+    width: 100vw;
+    height: 90px;
 }
 
 .main-content {
