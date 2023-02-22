@@ -9,7 +9,7 @@ const postList = async (name, occasion, present, url) => {
 		body: JSON.stringify({
 			owner: name,
 			name: occasion,
-			presentName: present,
+			presentList: present,
 			url: url
 		})
 	});
@@ -85,6 +85,31 @@ export default function ListsCreationView() {
 	//handleSubmit saves the information writen in my input and resets the form
 	const handleSubmit = event => {
 		event.preventDefault(); //prevents from refreshing
+		const presents = addInput.map(input => ({ presentName: input.present, url: input.url }));
+		postList(list.name, list.occasion, presents) //sending the input info to the back end
+			//the back end is gonna return an answer with the listId (used on post back end)
+			.then(fetchResponse => {
+				//the api returns the id that it's created
+				console.log(fetchResponse.listId);
+				setResponse(fetchResponse.listId);
+			})
+			.catch(error => {
+				setError(`List was not created: ${error}`); //in case of error returns it
+			});
+		setList({
+			//reset the form
+			name: "",
+			occasion: ""
+		});
+		setAddInput([
+			{
+				present: "",
+				url: ""
+			}
+		]);
+	};
+	/* const handleSubmit = event => {
+		event.preventDefault(); //prevents from refreshing
 		postList(list.name, list.occasion, addInput.present, addInput.url) //sending the input info to the back end
 			//the back end is gonna return an answer with the listId (used on post back end)
 			.then(fetchResponse => {
@@ -104,7 +129,7 @@ export default function ListsCreationView() {
 			present: "",
 			url: ""
 		});
-	};
+	}; */
 
 	return (
 		<div>

@@ -35,28 +35,30 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
-//router.get("/:id/presents", async (req, res) => {});
-
-/*
-router.post is gonna add a list, 
-save the last id added,
-add the presents,
-return the list id to the client 
- */
+//router.post is gonna add a list, save the last id added, add the presents, return the list id to the client
 router.post("/create", async (req, res) => {
-	console.log("Backend recebeu request");
-	const owner = req.body.owner;
-	const name = req.body.name; //name of the ocasion
-	const addPerson = await db(`INSERT INTO lists (owner, name) VALUES ("${owner}", "${name}");`);
-	//now I need to add the presents to the list
-	if (addPerson.insertId) {
-		const insertId = addPerson.insertId;
-		const presentName = req.body.presentName;
-		const url = req.body.url;
-		await db(`INSERT INTO presents (name, url, list_id) VALUES ("${presentName}", "${url}", ${insertId});`);
-		res.send({ listId: insertId });
-	} else {
-		res.send("Could not insert list");
+	try {
+		console.log("Backend recebeu request");
+		const owner = req.body.owner;
+		const name = req.body.name; //name of the ocasion
+		const addPerson = await db(`INSERT INTO lists (owner, name) VALUES ("${owner}", "${name}");`);
+		//now I need to add the presents to the list
+		if (addPerson.insertId) {
+			const insertId = addPerson.insertId;
+			const presentsList = req.body.presentList;
+			for (let i = 0; i < presentsList.length; i++) {
+				const presentName = presentsList[i].presentName;
+				const presentUrl = presentsList[i].url;
+				await db(
+					`INSERT INTO presents (name, url, list_id) VALUES ("${presentName}", "${presentUrl}", ${insertId});`
+				);
+			}
+			res.send({ listId: insertId }); //return of my post
+		} else {
+			res.status(400).send("Could not insert list");
+		}
+	} catch (err) {
+		res.status(400).send({ error: err.message });
 	}
 });
 
